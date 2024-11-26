@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Video</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Adicionar Video</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
 </head>
-<body>
+<body class="container">
 
 <h2>Adicionar Video</h2>
 
 <form id="videoForm">
-    <label for="code">Code:</label><br>
-    <input type="text" id="code" name="code" value=""><br><br>
+    <div class="form-group">
+        <label for="code">Code:</label>
+        <input type="text" class="form-control" id="code" name="code" placeholder="Código del video">
+    </div>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Título del video">
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descripción del video"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="duration">Duration (min):</label>
+        <input type="number" class="form-control" id="duration" name="duration" placeholder="Duración en minutos">
+    </div>
 
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" value=""><br><br>
-
-    <input type="button" value="Guardar" class="btn btn-primary" onclick="add();">
+    <button type="button" class="btn btn-primary" onclick="add();">Guardar</button>
 </form>
 
 <a href="../index.html" class="link-secondary">Volver al inicio</a>
@@ -24,16 +39,19 @@
     function add() {
         var code = document.getElementById("code").value;
         var title = document.getElementById("title").value;
+        var description = document.getElementById("description").value;
+        var duration = document.getElementById("duration").value;
 
-        // Validar que ambos campos no estén vacíos
-        if (code === "" || title === "") {
-            alert("Por favor, complete ambos campos.");
+        if (code === "" || title === "" || description === "" || duration === "") {
+            alert("Por favor, complete todos los campos.");
             return;
         }
 
         var newVideo = {
             "code": code,
-            "title": title
+            "title": title,
+            "description": description,
+            "duration": duration
         };
 
         var xmlhttp = new XMLHttpRequest();
@@ -44,7 +62,7 @@
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if (xmlhttp.status === 200) {
                     alert("Video añadido exitosamente");
-                    window.location.href = "list.html"; // Redirigir a la página de lista
+                    window.location.href = "list.html";
                 } else {
                     alert("Hubo un error al añadir el video");
                     console.error("Error:", xmlhttp.status, xmlhttp.statusText);
