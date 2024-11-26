@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Videos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Adicionar Video</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
+
+</head>
+<body class="container">
+
+<h2>Lista de Videos</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Duration (min)</th>
+    </tr>
+    </thead>
+    <tbody id="videos_table"></tbody>
+</table>
+
+<a href="../index.html" class="btn btn-secondary">Volver al inicio</a>
+
+<script>
+    find_all_videos();
+
+    function find_all_videos() {
+        console.log("Listing all videos:");
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'http://localhost:8080/videos', true);
+
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                var status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    var json = JSON.parse(xhttp.responseText);
+                    createTable(json);
+                } else {
+                    console.log("Error");
+                }
+            }
+        };
+        xhttp.send();
+    }
+
+    function createTable(videos) {
+        var tableBody = document.getElementById("videos_table");
+
+        videos.forEach(function(video) {
+            var tr = document.createElement("tr");
+
+            var tdCode = document.createElement("td");
+            tdCode.textContent = video.code;
+            tr.appendChild(tdCode);
+
+            var tdTitle = document.createElement("td");
+            tdTitle.textContent = video.title;
+            tr.appendChild(tdTitle);
+
+            var tdDescription = document.createElement("td");
+            tdDescription.textContent = video.description;
+            tr.appendChild(tdDescription);
+
+            var tdDuration = document.createElement("td");
+            tdDuration.textContent = video.duration;
+            tr.appendChild(tdDuration);
+
+            tableBody.appendChild(tr);
+        });
+    }
+</script>
+
+</body>
+</html>

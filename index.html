@@ -2,17 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" href="video/style.css"> <!-- Enlace al archivo CSS -->
 </head>
 <body>
 
-<h1>Bienvenido a la Cultura Media</h1>
+<!-- Barra de navegación -->
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="video/add.html">Adicionar Video</a>
+    <a href="video/list.html">Listar Videos</a>
+</nav>
 
-<!-- Enlace para listar videos -->
-<a href="video/list.html">Listar Videos</a><br><br>
+<!-- Contenedor principal -->
+<div class="container">
+    <h1>Bienvenido a la Cultura Media</h1>
+    <p>Una plataforma para gestionar tus videos culturales.</p>
 
-<!-- Enlace para adicionar un nuevo video -->
-<a href="video/add.html">Adicionar Videos</a> <!-- Este es el enlace que agregamos -->
+    <div class="links">
+        <a href="video/add.html" class="btn">Adicionar un Video</a>
+        <a href="video/list.html" class="btn">Ver Videos</a>
+    </div>
+</div>
 
 </body>
 </html>
+
